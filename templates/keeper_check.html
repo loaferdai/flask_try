@@ -1,0 +1,82 @@
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>志愿者活动管理系统</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/static/bootstrap-3.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/dashboard.css" rel="stylesheet">
+  </head>
+
+  <body>
+    {% block modal %}
+    {% endblock %}
+    <nav class="navbar navbar-inverse navbar-fixed-top" style="background: #707070;">
+      <div class="container-fluid container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/index">志愿者活动管理系统</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="layui-nav-item"><img src="/static/image/1.jpg" class="layui-circle"  width="35px" height="35px" ></li>
+            <li><a>{{ keeper_manage_msg['Name'] }}</a></li>
+            <li><a href="/keeper_fix/{{keeper_manage_msg['PID']}}">信息修改</a></li>
+            <li><a href="/activity_create">申报活动</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="bs-docs-header" id="content" tabindex="-1" style="padding-bottom: 280px;background: #fff url(/static/image/login_bg.png)">
+      <div class="container">
+        <h1 style="font-size: 80px;color:#fff;margin-top: 100px;">中国青年志愿者</h1>
+        <p  style="font-size: 30px;color:#fff;margin-right: 380px;">关爱他人 关爱社会 关爱自然</p>
+      </div>
+    </div>
+    <div class="col-md-2"></div>
+    <div class="container-fluid col-md-8 main">
+        <div class=" main">
+          <h1 class="page-header">活动报名名单</h1>
+          <div class="row placeholders">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>UID</th>
+                  <td>姓名</td>
+                  <td>性别</td>
+                  <td>手机号</td>
+                  {% if activitypack['Status']==0 %}
+                  <td>操作</td>
+                  {% endif %}
+                </tr>
+              </thead>
+              <tbody>
+              {% for i in range(len_userpack) %}
+                <tr>
+                  <th>{{userpack[i]['UID']}}</th>
+                  <td>{{userpack[i]['Name']}}</td>
+                  <td>{{userpack[i]['Sex']}}</td>
+                  <td>{{userpack[i]['phone']}}</td>
+                  {% if activitypack['Status']==0 %}
+                  <td>
+                    <a href="/check_detail?UID={{userpack[i]['UID']}}&AID={{activitypack['AID']}}" class="btn btn-warning" role="button">详情</a>
+                    <a href="/join_cancel?UID={{userpack[i]['UID']}}&AID={{activitypack['AID']}}" class="btn btn-danger" role="button">删除</a>
+                  </td>
+                  {% endif %}
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+    {% block jsmodal %}
+    {% endblock %}
+  </body>
+</html>

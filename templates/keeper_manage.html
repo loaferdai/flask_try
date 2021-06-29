@@ -1,0 +1,81 @@
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>志愿者活动管理系统</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/static/bootstrap-3.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/dashboard.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" style="background: #707070;">
+      <div class="container-fluid container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">志愿者活动管理系统</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="layui-nav-item"><img src="/static/image/1.jpg" class="layui-circle"  width="35px" height="35px" ></li>
+            <li><a>{{ keeper_manage_msg['Name'] }}</a></li>
+            <li><a href="/keeper_fix/{{keeper_manage_msg['PID']}}">信息修改</a></li>
+            <li><a href="/activity_create">申报活动</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="bs-docs-header" id="content" tabindex="-1" style="padding-bottom: 280px;background: #fff url(/static/image/login_bg.png)">
+      <div class="container">
+        <h1 style="font-size: 80px;color:#fff;margin-top: 100px;">中国青年志愿者</h1>
+        <p  style="font-size: 30px;color:#fff;margin-right: 380px;">关爱他人 关爱社会 关爱自然</p>
+      </div>
+    </div>
+    <div class="col-md-2"></div>
+    <div class="container-fluid col-md-8 main">
+        <div class=" main">
+          <h1 class="page-header">进行中的活动</h1>
+          <div class="row placeholders">
+            {% for i in range(len_activity_ing) %}
+              <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                <img data-src="holder.js/100%x200" alt="100%x200" src="/static/image/1.jpg" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+                  <div class="caption" style="padding:0px">
+                    <h3>{{activity_ing[i]['Name']}}</h3>
+                    <p>{{activity_ing[i]['Date']}}</p>
+                    <h4>{{activity_ing[i]['Content']}}</h4>
+                      <p style="margin-top:10px"><a href="/activity_fix/{{activity_ing[i]['AID']}}" class="btn btn-default" role="button" style="background-color:#49dddd">编辑</a>
+                      <a href="/activity_chcek/{{activity_ing[i]['AID']}}" class="btn btn-primary" role="button">管理</a>
+                        <a href="/activity_end/{{activity_ing[i]['AID']}}" class="btn btn-success" role="button">结束</a>
+                      <a href="/activity_delete/{{activity_ing[i]['AID']}}" class="btn btn-danger" role="button">删除</a></p>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+          <h2 class="sub-header">已完结的活动</h2>
+          <div class="row placeholders">
+            {% for i in range(len_activity_ed) %}
+              <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                <img data-src="holder.js/100%x200" alt="100%x200" src="/static/image/1.jpg" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+                  <div class="caption">
+                    <h3>{{activity_ed[i]['Name']}}</h3>
+                    <p>{{activity_ed[i]['Date']}}</p>
+                    <h4>{{activity_ed[i]['Content']}}</h4>
+                    <p style="margin-top:10px"><a href="/activity_chcek/{{activity_ed[i]['AID']}}" class="btn btn-primary" role="button">活动已结束,查看</a></p>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+  </body>
+</html>

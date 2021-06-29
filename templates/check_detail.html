@@ -1,0 +1,61 @@
+{% extends '/keeper_check.html' %}
+
+{% block modal %}
+<div class="col-md-2"></div>
+    <div class="modal fade" id="myModal" >
+            <div class="col-xs-4 .col-sm-4"></div>
+            <div class="modal-dialog col-xs-3 .col-sm-3">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">成员 详情</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-inline" style="text-align:center">
+                          <div class="form-group">
+                            <label>姓名</label>
+                            <input type="text" class="form-control" value="{{user_info['Name']}}" readonly="readonly">
+                          </div>
+                          <div class="form-group">
+                            <label>性别</label>
+                            <input type="text" class="form-control" value="{{user_info['Sex']}}" readonly="readonly">
+                          </div>
+                        </form>
+                        <form method="post">
+                          <div class="form-group">
+                                <label class="control-label">  </label>
+                          </div>
+                          <div class="form-group ">
+                              <label class="control-label">通讯地址</label>
+                              <input type="text" class="form-control" value="{{user_info['Address']}}" readonly="readonly">
+                          </div>
+                          <div class="form-group">
+                              <label class="control-label">联系手机</label>
+                              <input type="text" class="form-control" value="{{user_info['phone']}}" readonly="readonly">
+                          </div>
+                          <div class="form-group">
+                                <label class="control-label">申报理由</label>
+                                <textarea type="text" class="form-control" readonly="readonly">{{joins_info['Descon']}}</textarea>
+                          </div>
+                          <div class="form-group" style="text-align:center">
+                            <button type="button" class="btn btn-primary" style="text-align:center" data-dismiss="modal">
+                              &nbsp&nbsp&nbsp&nbsp关闭&nbsp&nbsp&nbsp&nbsp
+                            </button>
+                          </div>
+                        </form>
+                     </div>
+                </div>
+            </div>
+            <div class="col-xs-5 .col-sm-5"></div>
+        </div>
+{% endblock %}
+{% block jsmodal %}
+<script src="/static/bootstrap-3.4.1/js/jquery.js"></script>
+<script src="/static/bootstrap-3.4.1/dist/js/bootstrap.min.js"></script>
+<script>
+    $(function () {
+    $('[data-toggle="popover"]').popover()
+    })
+    $("#myModal").modal("show");
+</script>
+{% endblock %}
